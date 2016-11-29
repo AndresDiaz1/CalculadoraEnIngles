@@ -1,16 +1,6 @@
 from Calculator.Calculator import Calculator
 from WordToNumberTraductor.WordToNumberTraductor import WordToNumberTraductor
-
-class UserInterface():
-    def showTitle(self):
-        print("***"*15)
-        print("Calculadora Suma de numeros en Ingles")
-        print("***"*15)
-
-    def getWordNumber(self, order):
-        message="ingrese el "+order+" numero en ingles: "
-        number = raw_input(message)
-        return number
+from UserInterface.UserInterface import UserInterface
 
 if __name__ == "__main__":
     userInterface=UserInterface()
@@ -25,7 +15,7 @@ if __name__ == "__main__":
 
     calculator=Calculator()
     result = calculator.add(number1, number2)
-    print("El resultado es ", result)
+    userInterface.showResult(result)
 
 
 
