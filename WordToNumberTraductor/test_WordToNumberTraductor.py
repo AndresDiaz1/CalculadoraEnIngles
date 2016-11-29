@@ -6,7 +6,6 @@ class testWordToNumberTraductor(unittest.TestCase):
 
     def setUp(self):
         self.traductor=WordToNumberTraductor()
-        self.InvalidNumber=InvalidNumberException("Numero invalido")
 
     def test_splites_phrase_into_words(self):
         wordArray=self.traductor.splitPhrase("one hundred")
@@ -32,8 +31,8 @@ class testWordToNumberTraductor(unittest.TestCase):
         number = self.traductor.translate("twenty one")
         self.assertEqual(number, 21)
 
-    #def test_should_raise_Exception_if_number_does_not_exists(self):
-     #   self.assertRaises(self.InvalidNumber, lambda: self.traductor.translate("twenty uno"))
+    def test_should_raise_Exception_if_number_does_not_exists(self):
+        self.assertRaises(InvalidNumberException, lambda: self.traductor.translate("twenty uno"))
 
 if __name__ == '__main__':
     unittest.main()

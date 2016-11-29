@@ -81,10 +81,4 @@ class WordToNumberTraductor():
                 else:
                     raise InvalidNumberException("Numero invalido")
 
-        print (magnitudeNumberCounter + elementalNumbersCounter)
         return magnitudeNumberCounter + elementalNumbersCounter
-
-if __name__ == "__main__":
-    traductor=WordToNumberTraductor()
-    traductor.translate("one dos twenty three billion four hundred fifty six million seven hundred eighty nine thousand twelve")
-
