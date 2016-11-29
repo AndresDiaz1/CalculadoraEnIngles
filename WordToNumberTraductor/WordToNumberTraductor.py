@@ -30,7 +30,7 @@ elementalNumbers = {
     'eighty': 80,
     'ninety': 90
 }
-magnitudes = {
+magnitudeNumbers = {
     'thousand': 1000,
     'million': 1000000,
     'billion': 1000000000,
@@ -44,6 +44,9 @@ magnitudes = {
     'decillion': 1000000000000000000000000000000000,
 }
 
+class InvalidNumberException(Exception):
+    def __init__(self, message):
+        Exception.__init__(self, message)
 
 class WordToNumberTraductor():
 
@@ -53,4 +56,35 @@ class WordToNumberTraductor():
 
     def getElementalNumber(self, word):
         return elementalNumbers.get(word,None)
+
+    def getMagnitudeNumber(self, word):
+        return magnitudeNumbers.get(word,None)
+
+    def translate(self,Phrase):
+        wordsNumberArray=self.splitPhrase(Phrase)
+        elementalNumbersCounter=0
+        magnitudeNumberCounter=0
+
+        for word in wordsNumberArray:
+            number=self.getElementalNumber(word)
+
+            if number is not None:
+                elementalNumbersCounter += number
+            elif word == "hundred" and elementalNumbersCounter!=0:
+                elementalNumbersCounter *=100
+            else:
+                number=self.getMagnitudeNumber(word)
+
+                if number is not None:
+                    magnitudeNumberCounter += elementalNumbersCounter * number
+                    elementalNumbersCounter=0
+                else:
+                    raise InvalidNumberException("Numero invalido")
+
+        print (magnitudeNumberCounter + elementalNumbersCounter)
+        return magnitudeNumberCounter + elementalNumbersCounter
+
+if __name__ == "__main__":
+    traductor=WordToNumberTraductor()
+    traductor.translate("one dos twenty three billion four hundred fifty six million seven hundred eighty nine thousand twelve")
 
