@@ -44,7 +44,56 @@ magnitudeNumbers = {
     'decillion': 1000000000000000000000000000000000,
 }
 
-class WordToNumberTraductor():
+ByOne = [
+"zero",
+"one",
+"two",
+"three",
+"four",
+"five",
+"six",
+"seven",
+"eight",
+"nine",
+"ten",
+"eleven",
+"twelve",
+"thirteen",
+"fourteen",
+"fifteen",
+"sixteen",
+"seventeen",
+"eighteen",
+"nineteen"
+]
+ByTen = [
+"zero",
+"ten",
+"twenty",
+"thirty",
+"forty",
+"fifty",
+"sixty",
+"seventy",
+"eighty",
+"ninety"
+]
+zGroup = [
+"",
+"thousand",
+"million",
+"billion",
+"trillion",
+"quadrillion",
+"quintillion",
+"sextillion",
+"septillion",
+"octillion",
+"nonillion",
+"decillion",
+]
+
+class Translator():
 
     def splitPhrase(self,splitPhrase):
         wordsNumberArray=re.split(r"[\s-]+", splitPhrase)
@@ -56,7 +105,7 @@ class WordToNumberTraductor():
     def getMagnitudeNumber(self, word):
         return magnitudeNumbers.get(word,None)
 
-    def translate(self,Phrase):
+    def wordToNumberTranslate(self, Phrase):
         wordsNumberArray=self.splitPhrase(Phrase)
         elementalNumbersCounter=0
         magnitudeNumberCounter=0
@@ -78,3 +127,27 @@ class WordToNumberTraductor():
                    return "Invalid Number"
 
         return magnitudeNumberCounter + elementalNumbersCounter
+
+
+    def numberToWordTranslate(self,number):
+        return 0 if number=="Zero" else self.thousandUp(number)
+
+    def thousandUp(self,number):
+        return " ".join(reversed([self.subThousand(z) + (" " + zGroup[i] if i else "") if z else "" for i, z in enumerate(self.splitByThousands(number))]))
+
+    def splitByThousands(self,number):
+        resultSplittedByThousands = []
+        while number:
+            number, remainder = divmod(number, 1000)
+            resultSplittedByThousands.append(remainder)
+        return resultSplittedByThousands
+
+    def subThousand(self,number):
+        if number <= 19:
+            return ByOne[number]
+        elif number <= 99:
+            q, r = divmod(number, 10)
+            return ByTen[q] + (" " + self.subThousand(r) if r else "")
+        else:
+            q, r = divmod(number, 100)
+            return ByOne[q] + " hundred" + (" and " + self.subThousand(r) if r else "")

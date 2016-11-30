@@ -1,10 +1,10 @@
 from Calculator.Calculator import Calculator
-from WordToNumberTraductor.WordToNumberTraductor import WordToNumberTraductor
+from Translator.Translator import Translator
 from UserInterface.UserInterface import UserInterface
 
 if __name__ == "__main__":
     userInterface=UserInterface()
-    traductor = WordToNumberTraductor()
+    traductor = Translator()
     calculator=Calculator()
 
     userInterface.showTitle()
@@ -12,8 +12,8 @@ if __name__ == "__main__":
     number1 = userInterface.getWordNumber("primer")
     number2 = userInterface.getWordNumber("segundo")
 
-    number1 = traductor.translate(number1)
-    number2 = traductor.translate(number2)
+    number1 = traductor.wordToNumberTranslate(number1)
+    number2 = traductor.wordToNumberTranslate(number2)
 
     result = calculator.add(number1, number2)
     userInterface.showResult(result)

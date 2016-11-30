@@ -1,7 +1,9 @@
+from Translator.Translator import Translator
+
 class UserInterface():
     def showTitle(self):
         print("***"*15)
-        print("Calculadora Suma de numeros en Ingles")
+        print("Calculadora Suma de numeros en Ingles Vivelab")
         print("***"*15)
 
     def getWordNumber(self, order):
@@ -12,3 +14,6 @@ class UserInterface():
     def showResult(self,result):
         print("---"*15)
         print ("El resultado es: ", result)
+        translator=Translator()
+        print("Que en ingles seria", translator.numberToWordTranslate(result))
+        print("---"*15)
