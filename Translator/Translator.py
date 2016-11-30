@@ -146,8 +146,8 @@ class Translator():
         if number <= 19:
             return ByOne[number]
         elif number <= 99:
-            q, r = divmod(number, 10)
-            return ByTen[q] + (" " + self.subThousand(r) if r else "")
+            quotient, remainder = divmod(number, 10)
+            return ByTen[quotient] + (" " + self.subThousand(quotient) if remainder else "")
         else:
-            q, r = divmod(number, 100)
-            return ByOne[q] + " hundred" + (" and " + self.subThousand(r) if r else "")
+            quotient, remainder = divmod(number, 100)
+            return ByOne[quotient] + " hundred" + (" and " + self.subThousand(remainder) if remainder else "")

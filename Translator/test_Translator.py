@@ -44,6 +44,15 @@ class testNumberToWordTranslator(unittest.TestCase):
     def test_should_split_by_thousands(self):
         self.assertEqual(self.traductor.splitByThousands(2705), [705,2])
 
+    def test_should_return_sub_thousands_function_a_string_below_19_if_passed_number_is_below_19(self):
+        self.assertEqual(self.traductor.subThousand(3), "three")
+
+    def test_should_return_sub_thousands_function_a_string_below_99_if_passed_number_is_below_99(self):
+        self.assertEqual(self.traductor.subThousand(33), "thirty three")
+
+    def test_should_return_sub_thousands_function_a_string_above_99_if_passed_number_is_above_99(self):
+        self.assertEqual(self.traductor.subThousand(333), "three hundred and thirty three")
+
 
 if __name__ == '__main__':
     unittest.main()
