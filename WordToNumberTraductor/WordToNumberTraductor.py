@@ -44,10 +44,6 @@ magnitudeNumbers = {
     'decillion': 1000000000000000000000000000000000,
 }
 
-class InvalidNumberException(Exception):
-    def __init__(self, message):
-        Exception.__init__(self, message)
-
 class WordToNumberTraductor():
 
     def splitPhrase(self,splitPhrase):
@@ -79,6 +75,6 @@ class WordToNumberTraductor():
                     magnitudeNumberCounter += elementalNumbersCounter * number
                     elementalNumbersCounter=0
                 else:
-                    raise InvalidNumberException("Numero invalido")
+                   return "Invalid Number"
 
         return magnitudeNumberCounter + elementalNumbersCounter
